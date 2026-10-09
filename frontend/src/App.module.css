@@ -1,0 +1,16 @@
+/* área com a tabela e o gráfico, lado a lado */
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;                 /* HStack(spacing: 100) */
+}
+
+/* título + subtítulo, empilhados */
+.intro {
+  display: flex;
+  flex-direction: column;     /* VStack */
+  justify-content: center;
+  align-items: center;        /* em coluna, centraliza na horizontal */
+  gap: 8px;                   /* VStack(spacing: 8) */
+}

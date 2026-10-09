@@ -1,0 +1,32 @@
+/* gráfico + legenda lado a lado → <div className={styles.container}> */
+.container {
+  display: flex;             /* HStack */
+  align-items: center;       /* centraliza a legenda na altura do gráfico */
+  gap: 20px;
+}
+
+/* a lista da legenda → <ul className={styles.legend}> */
+.legend {
+  list-style: none;          /* tira as bolinhas padrão da lista */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;    /* VStack */
+  gap: 20px;
+}
+
+/* cada linha da legenda: quadradinho + nome */
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: bold;         /* a cor vem do style={{ color }} no .tsx */
+}
+
+/* o quadradinho colorido (a cor vem do style={{ background }} no .tsx) */
+.swatch {
+  width: 24px;
+  height: 24px;
+  border-radius: 4px;
+}

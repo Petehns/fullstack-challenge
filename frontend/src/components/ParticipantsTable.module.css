@@ -1,0 +1,22 @@
+/* a tabela inteira → <table className={styles.table}> */
+.table {
+  border-collapse: collapse;  /* funde as bordas vizinhas numa linha só */
+  font-size: 14px;            /* as células herdam (como um .font() no container) */
+  color: #555;
+}
+
+/* todas as células, de cabeçalho (th) e de dados (td), dentro de .table */
+.table th,
+.table td {
+  border: 1px solid #ccc;     /* linha fina cinza em volta de cada célula */
+  padding: 8px 12px;          /* 8px em cima/embaixo, 12px nas laterais */
+  text-align: left;           /* nomes à esquerda (o th vem centralizado por padrão) */
+}
+
+/* 1ª coluna (numeração) e 4ª coluna (participação) centralizadas */
+.table th:nth-child(1),
+.table td:nth-child(1),
+.table th:nth-child(4),
+.table td:nth-child(4) {
+  text-align: center;
+}
