@@ -1,0 +1,50 @@
+/* a faixa azul inteira → <header className={styles.header}> */
+.header {
+  background: #00b8e2;
+  padding: 50px 0;       /* aq eu defino o padding vertical do header para mudar seu tamanho */
+}
+
+/* a linha com os inputs + botão → <form className={styles.form}> */
+.form {
+  display: flex;             /* vira um HStack */
+  justify-content: center;   /* centraliza horizontalmente */
+  gap: 20px;                 /* HStack(spacing: 20) */
+}
+
+/* cada caixa de texto → <input className={styles.input}> (vale pros 3) */
+.input {
+  width: 160px;              /* .frame(width: 150) */
+  height: 34px;              /* .frame(height: 34) */
+  padding: 0 20px;           /* afasta o texto da borda esquerda/direita */
+  border: none;              /* remove a borda cinza padrão do navegador */
+  background: white;
+  font-size: 14px;
+  color: #333;               /* cor do texto que o usuário digita */
+}
+
+/* o texto "First name"/"Last name"... dos 3 inputs (o texto em si vem do .tsx) */
+.input::placeholder {
+  color: #777;
+}
+
+/* quando a caixa está selecionada (tipo @FocusState) */
+.input:focus {
+  outline: 2px solid #0077a3;  /* troca o contorno padrão por um azul escuro */
+}
+
+/* o botão SEND → <button className={styles.send}> */
+.send {
+  width: 100px;              /* .frame(width: 150) */
+  height: 34px; 
+  background: transparent;   /* sem fundo: aparece o azul do header */
+  border: 2px solid white;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;           /* mãozinha ao passar o mouse */
+}
+
+/* quando o mouse passa por cima do botão */
+.send:hover {
+  background: rgba(255, 255, 255, 0.15);  /* clareia um pouco */
+}
