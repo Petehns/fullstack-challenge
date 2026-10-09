@@ -14,3 +14,11 @@
   align-items: center;        /* em coluna, centraliza na horizontal */
   gap: 8px;                   /* VStack(spacing: 8) */
 }
+
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;          /* espaço entre form, título e a linha tabela+gráfico */
+}
+
+
