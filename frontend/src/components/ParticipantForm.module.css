@@ -1,53 +1,45 @@
-/* a faixa azul inteira → <header className={styles.header}> */
 .header {
   background: #00b8e2;
-  padding: 50px 0;     
-    /* aq eu defino o padding vertical do header para mudar seu tamanho */
+  padding: 50px 0;
 }
-
 
 .form {
-  display: flex;             
-  justify-content: center;   
-  gap: 20px;                
+  display: flex;
+  justify-content: center;
+  gap: 20px;
 }
-
 
 .input {
-  width: 220px;              
-  height: 44px;              
-  padding: 0 20px;           /* afasta o texto da borda esquerda/direita */
-  border: none;              /* remove a borda cinza padrão do navegador */
+  width: 220px;
+  height: 44px;
+  padding: 0 20px;
+  border: none;
   background: white;
   font-size: 14px;
-  color: #333;               /* cor do texto que o usuário digita */
-   border-radius: 2px;
+  color: #333;
+  border-radius: 2px;
 }
 
-/* o texto "First name"/"Last name"... dos 3 inputs (o texto em si vem do .tsx) */
 .input::placeholder {
   color: #777;
 }
 
-/* quando a caixa está selecionada (tipo @FocusState) */
 .input:focus {
-  outline: 2px solid #0077a3;  /* troca o contorno padrão por um azul escuro */
+  outline: 2px solid #0077a3;
 }
 
-/* o botão SEND → <button className={styles.send}> */
 .send {
-  width: 150px;              /* .frame(width: 150) */
-  height: 44px; 
-  background: transparent;   /* sem fundo: aparece o azul do header */
+  width: 150px;
+  height: 44px;
+  background: transparent;
   border: 2px solid white;
   color: white;
   font-size: 15px;
   font-weight: bold;
-  cursor: pointer;           /* mãozinha ao passar o mouse */
-   border-radius: 2px;
+  cursor: pointer;
+  border-radius: 2px;
 }
 
-/* quando o mouse passa por cima do botão */
 .send:hover {
-  background: rgba(255, 255, 255, 0.15);  /* clareia um pouco */
+  background: rgba(255, 255, 255, 0.15);
 }
