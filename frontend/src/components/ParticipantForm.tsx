@@ -49,6 +49,7 @@ export function ParticipantForm({ onAdd }: Props) {
             value={values[field.name]}
             onChange={handleChange}
             className={styles.input}
+            required
           />
         ))}
         <button type="submit" className={styles.send}>SEND</button>
