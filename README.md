@@ -1,15 +1,15 @@
 # Fullstack Challenge
 
-A web app to register people and their percentage of participation. The data is shown in a table and in a donut chart. The frontend is built with React and the backend is a REST API built with Django.
+Aplicação web para cadastrar pessoas e o percentual de participação de cada uma. Os dados aparecem numa tabela e num gráfico de rosca. O frontend é feito em React e o backend é uma API REST feita em Django.
 
-![Layout reference](docs/layout-onepage.png)
+![Layout de referência](docs/layout-onepage.png)
 
-## Tech stack
+## Tecnologias
 
 **Frontend**
 - React 19 + TypeScript
 - Vite
-- Recharts (donut chart)
+- Recharts (gráfico de rosca)
 - CSS Modules
 
 **Backend**
@@ -18,75 +18,75 @@ A web app to register people and their percentage of participation. The data is 
 - PostgreSQL
 - django-cors-headers
 
-## Project structure
+## Estrutura do projeto
 
 ```
 fullstack-challenge/
-├── backend/                  # Django REST API
-│   ├── config/               # project settings and root URLs
-│   └── participants/         # model, serializer, views and URLs for participants
-├── frontend/                 # React app
+├── backend/                  # API REST em Django
+│   ├── config/               # configurações do projeto e URLs principais
+│   └── participants/         # model, serializer, views e URLs dos participantes
+├── frontend/                 # aplicação React
 │   └── src/
-│       ├── App.tsx           # state and API calls
-│       ├── types.ts          # shared TypeScript types
-│       └── components/       # form, table and chart
-└── docs/                     # layout reference
+│       ├── App.tsx           # estado e chamadas à API
+│       ├── types.ts          # tipos TypeScript compartilhados
+│       └── components/       # formulário, tabela e gráfico
+└── docs/                     # layout de referência
 ```
 
-## Prerequisites
+## Pré-requisitos
 
 - [Python 3.12+](https://www.python.org/)
-- [Node.js 20+](https://nodejs.org/) (developed with Node 24)
-- [PostgreSQL 17](https://www.postgresql.org/) (on macOS: `brew install postgresql@17`)
+- [Node.js 20+](https://nodejs.org/) (desenvolvido com o Node 24)
+- [PostgreSQL 17](https://www.postgresql.org/) (no macOS: `brew install postgresql@17`)
 
-## How to run
+## Como rodar
 
-The backend and the frontend run at the same time, each one in its own terminal.
+O backend e o frontend rodam ao mesmo tempo, cada um no seu próprio terminal.
 
-### 1. Database
+### 1. Banco de dados
 
-Start PostgreSQL and create the database:
+Inicie o PostgreSQL e crie o banco:
 
 ```bash
-brew services start postgresql@17   # macOS with Homebrew
+brew services start postgresql@17   # macOS com Homebrew
 createdb challenge
 ```
 
-The database connection is read from environment variables. If a variable is not set, the default value is used:
+A conexão com o banco é lida de variáveis de ambiente. Se uma variável não for definida, o valor padrão é usado:
 
-| Variable | Default |
+| Variável | Padrão |
 |---|---|
 | `DB_NAME` | `challenge` |
 | `DB_USER` | `pete` |
-| `DB_PASSWORD` | *(empty)* |
+| `DB_PASSWORD` | *(vazio)* |
 | `DB_HOST` | `localhost` |
 | `DB_PORT` | `5432` |
 
-Set `DB_USER` and `DB_PASSWORD` to match your local PostgreSQL user, for example:
+Defina `DB_USER` e `DB_PASSWORD` com o seu usuário local do PostgreSQL, por exemplo:
 
 ```bash
-export DB_USER=your_user
-export DB_PASSWORD=your_password
+export DB_USER=seu_usuario
+export DB_PASSWORD=sua_senha
 ```
 
-Run these `export` commands in the same terminal you use for the backend, before the commands below.
+Rode esses `export` no mesmo terminal que você vai usar para o backend, antes dos comandos abaixo.
 
 ### 2. Backend
 
 ```bash
 cd backend
 python3 -m venv .venv
-source .venv/bin/activate          # on Windows: .venv\Scripts\activate
+source .venv/bin/activate          # no Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
 ```
 
-The API runs at **http://localhost:8000/participants/**.
+A API fica em **http://localhost:8000/participants/**.
 
 ### 3. Frontend
 
-In another terminal:
+Em outro terminal:
 
 ```bash
 cd frontend
@@ -94,38 +94,38 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:5173** in the browser.
+Abra **http://localhost:5173** no navegador.
 
-## Features
+## Funcionalidades
 
-- Register a participant with first name, last name and participation
-- Table and donut chart that update as soon as a participant is added or removed
-- Data saved in PostgreSQL, so it stays after the page is reloaded
-- Remove a participant with the trash button that appears when hovering a table row
-- Highlighted table row on hover
-- Subtitle with the number of participants and the total participation
-- Chart shows a gray "Sem dados" slice while the list is empty
+- Cadastro de participante com nome, sobrenome e participação
+- Tabela e gráfico de rosca que se atualizam assim que um participante é adicionado ou removido
+- Dados salvos no PostgreSQL, então continuam lá depois de recarregar a página
+- Remoção de participante pelo botão de lixeira que aparece ao passar o mouse sobre a linha da tabela
+- Destaque da linha da tabela sob o mouse
+- Subtítulo com a quantidade de participantes e o total de participação
+- O gráfico mostra uma fatia cinza "Sem dados" enquanto a lista está vazia
 
-### Validation
+### Validações
 
-- All form fields are required
-- Participation must be between 0 and 100
-- The sum of all participations cannot exceed 100%
-- Errors returned by the API are shown under the form and disappear after 5 seconds
+- Todos os campos do formulário são obrigatórios
+- A participação precisa estar entre 0 e 100
+- A soma de todas as participações não pode passar de 100%
+- Os erros devolvidos pela API aparecem abaixo do formulário e somem depois de 5 segundos
 
 ## API
 
-Base URL: `http://localhost:8000`
+URL base: `http://localhost:8000`
 
-| Method | Endpoint | Description | Success |
+| Método | Endpoint | Descrição | Sucesso |
 |---|---|---|---|
-| `GET` | `/participants/` | List all participants | `200 OK` |
-| `POST` | `/participants/` | Create a participant | `201 Created` |
-| `DELETE` | `/participants/<id>/` | Remove a participant | `204 No Content` |
+| `GET` | `/participants/` | Lista todos os participantes | `200 OK` |
+| `POST` | `/participants/` | Cadastra um participante | `201 Created` |
+| `DELETE` | `/participants/<id>/` | Remove um participante | `204 No Content` |
 
-### Create a participant
+### Cadastrar um participante
 
-Request:
+Requisição:
 
 ```json
 {
@@ -135,7 +135,7 @@ Request:
 }
 ```
 
-Response (`201 Created`):
+Resposta (`201 Created`):
 
 ```json
 {
@@ -146,9 +146,9 @@ Response (`201 Created`):
 }
 ```
 
-### Errors
+### Erros
 
-Invalid data returns `400 Bad Request` with a JSON object. Each key is a field, and its value is a list of messages:
+Dados inválidos retornam `400 Bad Request` com um objeto JSON. Cada chave é um campo, e o valor é uma lista de mensagens:
 
 ```json
 {
