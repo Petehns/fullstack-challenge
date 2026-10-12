@@ -1,11 +1,7 @@
-// components/ParticipantForm.tsx
-
-// 1. imports
 import { useState } from 'react';
 import type { NewParticipant } from '../types';
 import styles from './ParticipantForm.module.css';
 
-// 2. constantes de fora do componente (não mudam, não precisam ser recriadas a cada render)
 const fields = [
   { name: 'firstName', placeholder: 'First name' },
   { name: 'lastName', placeholder: 'Last name' },
@@ -14,17 +10,15 @@ const fields = [
 
 type Props = {
   onAdd: (participant: NewParticipant) => void;
+   erro: string;
 };
 
-// 3. o componente (a "struct View")
-export function ParticipantForm({ onAdd }: Props) {
-  // 4. estado
+export function ParticipantForm({ onAdd, erro }: Props) {
   const [values, setValues] = useState({ firstName: '', lastName: '', participation: '' });
 
-  // 5. funções
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target;
-    setValues({ ...values, [name]: value }); // copia tudo e troca só o campo digitado
+    setValues({ ...values, [name]: value });
   }
 
   function handleSubmit(event: React.FormEvent) {
@@ -37,7 +31,6 @@ export function ParticipantForm({ onAdd }: Props) {
     setValues({ firstName: '', lastName: '', participation: '' });
   }
 
-  // 6. a tela (o "body")
   return (
     <header className={styles.header}>
       <form className={styles.form} onSubmit={handleSubmit}>
@@ -54,6 +47,7 @@ export function ParticipantForm({ onAdd }: Props) {
         ))}
         <button type="submit" className={styles.send}>SEND</button>
       </form>
+        {erro && <p className={styles.erro}>{erro}</p>}
     </header>
   );
 }

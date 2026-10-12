@@ -1,24 +1,22 @@
-/* área com a tabela e o gráfico, lado a lado */
 .content {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 100px;                 /* HStack(spacing: 100) */
+  gap: 100px;
 }
 
-/* título + subtítulo, empilhados */
 .intro {
   display: flex;
-  flex-direction: column;     /* VStack */
+  flex-direction: column;
   justify-content: center;
-  align-items: center;        /* em coluna, centraliza na horizontal */
-  gap: 8px;                   /* VStack(spacing: 8) */
+  align-items: center;
+  gap: 8px;
 }
 
 .page {
   display: flex;
   flex-direction: column;
-  gap: 48px;          /* espaço entre form, título e a linha tabela+gráfico */
+  gap: 48px;
 }
 
 
