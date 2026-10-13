@@ -11,9 +11,10 @@ const fields = [
 type Props = {
   onAdd: (participant: NewParticipant) => void;
    erro: string;
+    setErro: (mensagem: string) => void;
 };
 
-export function ParticipantForm({ onAdd, erro }: Props) {
+export function ParticipantForm({ onAdd, erro, setErro }: Props) {
   const [values, setValues] = useState({ firstName: '', lastName: '', participation: '' });
 
   function handleChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -47,7 +48,12 @@ export function ParticipantForm({ onAdd, erro }: Props) {
         ))}
         <button type="submit" className={styles.send}>SEND</button>
       </form>
-        {erro && <p className={styles.erro}>{erro}</p>}
+        {erro && (
+    <div className={styles.balao}>
+      <button type="button" className={styles.fechar} onClick={() => setErro("")}>×</button>
+      <p>{erro}</p>
+    </div>
+  )}
     </header>
   );
 }
