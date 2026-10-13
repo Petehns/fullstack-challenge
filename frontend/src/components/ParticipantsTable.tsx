@@ -16,11 +16,11 @@ export function ParticipantsTable({ participants, onDelete }: Props) {
           <th>First name</th>
           <th>Last name</th>
           <th>Participation</th>
-          <th className={styles.actions}></th>{/* coluna extra da lixeira, sem bordas */}
+          <th className={styles.actions}></th>
         </tr>
       </thead>
       <tbody>
-        {participants.map((participant, index) => ( /*index tipo foreach que passa por todo index de participantes */
+        {participants.map((participant, index) => (
           <tr key={participant.id}>
             <td>{index + 1}</td>
             <td>{participant.firstName}</td>
@@ -33,7 +33,6 @@ export function ParticipantsTable({ participants, onDelete }: Props) {
                 onClick={() => onDelete(participant.id)}
                 aria-label={`Remover ${participant.firstName} ${participant.lastName}`}
               >
-                {/* ícone de lixeira desenhado em SVG (tipo um SF Symbol, só que inline) */}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
                   <path d="M3 6h18" />

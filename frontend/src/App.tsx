@@ -10,26 +10,34 @@ const API_URL = 'http://localhost:8000/participants/';
 
 function App() {
   const [participants, setParticipants] = useState<Participant[]>([]);
+  const [erro, setErro] = useState("")
 
-  // ao abrir a página, busca os participantes salvos no backend (tipo o .task {} do SwiftUI)
+  function mostrarErro(mensagem: string) {
+    setErro(mensagem);
+    setTimeout(() => setErro(""), 5000);
+  }
+
   useEffect(() => {
     async function loadParticipants() {
       try {
         const resposta = await fetch(API_URL);
         if (!resposta.ok) {
           console.error('Erro ao carregar participantes:', resposta.statusText);
+          mostrarErro('Não foi possível carregar os participantes.');
           return;
         }
         setParticipants(await resposta.json());
       } catch (erro) {
         console.error('Backend fora do ar ou bloqueado (CORS):', erro);
+        mostrarErro('Não foi possível conectar ao servidor.');
       }
     }
     loadParticipants();
   }, []);
 
-  async function handleAdd(participant: NewParticipant) {  /* adicionei o async e await para a coumunicacao*/
+  async function handleAdd(participant: NewParticipant) {
     try {
+    
       const resposta = await fetch(API_URL, {
         method: 'POST',
         headers: {
@@ -39,13 +47,17 @@ function App() {
       });
 
       if (!resposta.ok) {
-        console.error('Erro ao adicionar participante:', resposta.statusText);
+        const corpo: Record<string, string[]> = await resposta.json();
+
+        console.error('Erro ao adicionar participante: ', resposta.statusText);
+        mostrarErro(Object.values(corpo).flat().join(' '));
         return;
       }
-      const salvo: Participant = await resposta.json(); // o backend devolve o participante já com id
+      const salvo: Participant = await resposta.json();
       setParticipants((prev) => [...prev, salvo]);
     } catch (erro) {
       console.error('Backend fora do ar ou bloqueado (CORS):', erro);
+      mostrarErro('Não foi possível conectar ao servidor.');
     }
   }
 
@@ -54,22 +66,26 @@ function App() {
       const resposta = await fetch(`${API_URL}${id}/`, { method: 'DELETE' });
 
       if (!resposta.ok) {
+        const corpo: Record<string, string | string[]> = await resposta.json();
+
         console.error('Erro ao remover participante:', resposta.statusText);
+        mostrarErro(Object.values(corpo).flat().join(' '));
         return;
       }
-      setParticipants((prev) => prev.filter((p) => p.id !== id)); // tira da lista só o removido
+      setParticipants((prev) => prev.filter((p) => p.id !== id));
     } catch (erro) {
       console.error('Backend fora do ar ou bloqueado (CORS):', erro);
+      mostrarErro('Não foi possível conectar ao servidor.');
     }
   }
 
   return (
     <div className={styles.page}>
-      <ParticipantForm onAdd={handleAdd} />
+     <ParticipantForm onAdd={handleAdd} erro={erro} setErro={setErro} />
 
       <div className={styles.intro}>
         <h1 className={styles.title}>Lista de Participantes</h1>
-        <p className={styles.subtitle}>Esta lista tem {participants.length} {participants.length === 1 ? 'pessoa adicionada' : 'pessoas adicionadas'}.</p>
+        <p className={styles.subtitle}>Esta lista tem {participants.length} {participants.length === 1 ? 'pessoa adicionada' : 'pessoas adicionadas'} e um total de {participants.reduce((sum, p) => sum + p.participation, 0)}% em participações.</p>
       </div>
 
       <div className={styles.content}>
