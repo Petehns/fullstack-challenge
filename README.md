@@ -11,6 +11,7 @@ Aplicação web para cadastrar pessoas e o percentual de participação de cada 
 - Vite
 - Recharts (gráfico de rosca)
 - CSS Modules
+- Vitest + Testing Library (testes)
 
 **Backend**
 - Python 3.12
@@ -95,6 +96,38 @@ npm run dev
 ```
 
 Abra **http://localhost:5173** no navegador.
+
+## Testes
+
+### Backend
+
+Na pasta `backend`, com o ambiente virtual ativado:
+
+```bash
+python manage.py test
+```
+
+O Django cria um banco temporário só para os testes e o apaga no final, então os dados reais não são alterados. O usuário do PostgreSQL precisa ter permissão para criar bancos.
+
+Os testes cobrem:
+- cadastro, listagem e remoção de participantes
+- recusa de participação acima de 100
+- recusa quando a soma das participações passa de 100%
+
+### Frontend
+
+Na pasta `frontend`:
+
+```bash
+npm test
+```
+
+O comando fica observando os arquivos e roda os testes de novo a cada alteração. Para rodar uma vez só, use `npx vitest run`.
+
+Os testes usam Vitest e Testing Library, e simulam o backend, então não é preciso que a API esteja rodando. Eles cobrem:
+- a tabela: uma linha por participante e o botão de remover
+- o formulário: envio dos dados, limpeza dos campos, campos obrigatórios e exibição do erro
+- o App: carregamento dos participantes, erro 400 da API e falha de conexão
 
 ## Funcionalidades
 
