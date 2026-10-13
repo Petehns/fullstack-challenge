@@ -1,28 +1,60 @@
-/* a tabela inteira → <table className={styles.table}> */
 .table {
-  border-collapse: collapse;  /* funde as bordas vizinhas numa linha só */
-  font-size: 14px;            /* as células herdam (como um .font() no container) */
+  border-collapse: collapse;
+  font-size: 14px;
   color: #555;
 }
 
-/* todas as células, de cabeçalho (th) e de dados (td), dentro de .table */
 .table th,
 .table td {
   border: 1px solid #ccc;
-  padding: 8px;               /* respiro pequeno em todos os lados */
-  text-align: left;           /* nomes à esquerda (o th vem centralizado por padrão) */
+  padding: 8px;
+  text-align: left;
 }
 
+.table th:nth-child(1) { width: 20px; }
+.table th:nth-child(2) { width: 140px; }
+.table th:nth-child(3) { width: 180px; }
+.table th:nth-child(4) { width: 110px; }
 
-.table th:nth-child(1) { width: 20px; }    /* numeração */
-.table th:nth-child(2) { width: 140px; }   /* First name */
-.table th:nth-child(3) { width: 180px; }   /* Last name */
-.table th:nth-child(4) { width: 110px; }   /* Participation */
-
-/* 1ª coluna (numeração) e 4ª coluna (participação) centralizadas */
 .table th:nth-child(1),
 .table td:nth-child(1),
 .table th:nth-child(4),
 .table td:nth-child(4) {
   text-align: center;
+}
+
+.table tbody tr:hover td {
+  background: #f5f5f5;
+}
+
+.table .actions {
+  border: none;
+  background: transparent;
+  padding: 0 0 0 8px;
+  width: 32px;
+}
+
+.deleteButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  color: #999;
+  cursor: pointer;
+  visibility: hidden;
+}
+
+.table tbody tr:hover .deleteButton,
+.deleteButton:focus-visible {
+  visibility: visible;
+}
+
+.deleteButton:hover {
+  color: #e74c3c;
+  background: #fdecea;
 }
