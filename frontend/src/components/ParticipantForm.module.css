@@ -43,3 +43,36 @@
 .send:hover {
   background: rgba(255, 255, 255, 0.15);
 }
+
+.balao {
+  position: relative;
+  width: fit-content;
+  max-width: 600px;
+  margin: 16px auto 0;
+  background: rgba(255, 255, 255, 0.4);
+  padding: 8px 12px 8px 32px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.balao p {
+  margin: 0;
+}
+
+.fechar {
+  position: absolute;
+  top: 4px;
+  right: 8px;
+  padding: 0;
+  background: none;
+  border: none;
+  color: gray;
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.fechar:hover {
+  color: black;
+}
+    

@@ -11,7 +11,11 @@ const API_URL = 'http://localhost:8000/participants/';
 function App() {
   const [participants, setParticipants] = useState<Participant[]>([]);
   const [erro, setErro] = useState("")
-  
+
+  function mostrarErro(mensagem: string) {
+    setErro(mensagem);
+    setTimeout(() => setErro(""), 5000);
+  }
 
   useEffect(() => {
     async function loadParticipants() {
@@ -19,11 +23,13 @@ function App() {
         const resposta = await fetch(API_URL);
         if (!resposta.ok) {
           console.error('Erro ao carregar participantes:', resposta.statusText);
+          mostrarErro('Não foi possível carregar os participantes.');
           return;
         }
         setParticipants(await resposta.json());
       } catch (erro) {
         console.error('Backend fora do ar ou bloqueado (CORS):', erro);
+        mostrarErro('Não foi possível conectar ao servidor.');
       }
     }
     loadParticipants();
@@ -44,14 +50,14 @@ function App() {
         const corpo: Record<string, string[]> = await resposta.json();
 
         console.error('Erro ao adicionar participante: ', resposta.statusText);
-        setErro(Object.values(corpo).flat().join(' '));
-        setTimeout(() => setErro(""), 5000);
+        mostrarErro(Object.values(corpo).flat().join(' '));
         return;
       }
       const salvo: Participant = await resposta.json();
       setParticipants((prev) => [...prev, salvo]);
     } catch (erro) {
       console.error('Backend fora do ar ou bloqueado (CORS):', erro);
+      mostrarErro('Não foi possível conectar ao servidor.');
     }
   }
 
@@ -60,19 +66,22 @@ function App() {
       const resposta = await fetch(`${API_URL}${id}/`, { method: 'DELETE' });
 
       if (!resposta.ok) {
+        const corpo: Record<string, string | string[]> = await resposta.json();
+
         console.error('Erro ao remover participante:', resposta.statusText);
-        setErro('Erro ao remover participante: ' + resposta.statusText);
+        mostrarErro(Object.values(corpo).flat().join(' '));
         return;
       }
       setParticipants((prev) => prev.filter((p) => p.id !== id));
     } catch (erro) {
       console.error('Backend fora do ar ou bloqueado (CORS):', erro);
+      mostrarErro('Não foi possível conectar ao servidor.');
     }
   }
 
   return (
     <div className={styles.page}>
-     <ParticipantForm onAdd={handleAdd} erro={erro} />
+     <ParticipantForm onAdd={handleAdd} erro={erro} setErro={setErro} />
 
       <div className={styles.intro}>
         <h1 className={styles.title}>Lista de Participantes</h1>
